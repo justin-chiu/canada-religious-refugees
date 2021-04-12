@@ -1,0 +1,510 @@
+* {
+    box-sizing: border-box;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+// colours
+
+    // backgrounds
+    $rgba-b1-1: rgba(40,40,40,1);
+    $rgba-b1-0: rgba(40,40,40,0);
+    $rgba-b2-1: rgba(25,25,25,1);
+    $rgba-b2-75: rgba(25,25,25,0.75);
+    $rgba-b2-10: rgba(25,25,25,0.1);
+    $rgba-b2-0: rgba(25,25,25,0);
+
+    // text
+    $white: #ffffff;
+    $hex-text-1: #e2e2e2;
+    $hex-text-2: #adadad;
+
+    // ctrys
+    $hex-circle-total: #da8146;
+    $hex-circle-accepted: $white;
+    $hex-circle-accepted-stroke: $rgba-b1-1;
+    $hex-gov-restrictions: $hex-text-2;
+    $hex-social-hostilities: $white;
+
+// measurements
+
+$ctry-clm-religions-gutter: 1px;
+$ctry-clm-religions-margin: -1px;
+$triangle-height-max: 16px;
+$triangle-pos: 84%;
+$fletching-width: 92px;
+$fletching-spacing: 9px;
+$fletching-spacing-exp: 17px;
+$fletching-scale-up: 1.1;
+$religion-item-margin: 1.25rem;
+
+@import 'flexboxgrid';
+
+html, body {
+    margin: 0;
+
+    // text defaults
+
+    font-family: 'Assistant', sans-serif;
+    color: $hex-text-1;
+}
+img {
+    max-width: 100%;
+}
+
+p,h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+}
+
+em,strong, a, .small-caps {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+// type
+
+a {
+    color: inherit;
+    pointer-events: auto;
+    text-decoration: none;
+    transition: 0.2s color ease-in-out;
+
+    &:hover {
+        color: $hex-text-1;
+    }
+}
+
+.wm-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2em;
+    margin-bottom: 0.6rem;
+
+}
+
+.wm-subtitle {
+    // font-family: 'PT Serif', serif;
+    font-size: 1rem;
+    color: $hex-text-1;
+    font-weight: 500;
+}
+
+.wm-heading {
+    font-family: 'Mulish', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-right: 2rem;
+}
+
+.caption-serif {
+    font-family: 'PT Serif', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: $hex-text-2;
+
+    &.bold {font-weight: 600;}
+}
+
+.caption-sans {
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: $hex-text-2;
+
+    &.bold {font-weight: 800;}
+}
+
+.wm-heading-2 {
+    font-family: 'Mulish', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.5em;
+    color: $hex-text-1;
+}
+
+// divs
+
+.wm {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background-color: $rgba-b1-1;
+    overflow: hidden;
+    min-width: 1113px;
+}
+
+.wm-content-wrapper {
+    /* position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%); */
+    height: 1000px;
+    width: 1600px;
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+    // original 1390px by 870px
+}
+
+.wm-content {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.hex-text-1 {color: $hex-text-1;}
+.hex-text-2 {color: $hex-text-2;}
+
+// legend
+
+.wm-legend-top {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    z-index: 100;
+    background-image: linear-gradient($rgba-b2-1, $rgba-b2-75, $rgba-b2-0);
+    padding-bottom: 2rem;
+    padding-top: 6px;
+    pointer-events: none;
+}
+
+.wm-legend-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    z-index: 90;
+    background-image: linear-gradient(to top, $rgba-b2-1, $rgba-b2-75, $rgba-b2-0);
+    padding-top: 4rem;
+    pointer-events: none;
+}
+
+.wm-legend-top, .wm-legend-bottom {
+    transition: opacity 0.3s linear 0.3s;
+    opacity: 1;
+    &.closed {opacity: 0;}
+}
+
+.wm-legend-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+.wm-subtitle-wrapper {
+    margin-bottom: 1rem;
+}
+
+.wm-legend-heading {
+    margin-right: 2rem;
+}
+
+.wm-legend-how-to-read {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.wm-legend-group {
+    position: relative;
+    margin-top: -6px;
+}
+
+.wm-legend-label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+
+    .caption-sans {
+        white-space: nowrap;
+    }
+}
+
+.wm-legend-label-line {
+    height: 1px;
+    // background-color: $hex-text-1;
+    margin-right: 0.3rem;
+    border-top: 0.5px solid $hex-text-1;
+    border-bottom: 0.5px solid $rgba-b2-1;
+}
+
+.wm-legend-religions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .caption-serif, .wm-heading {
+        white-space: nowrap;
+    }
+}
+
+.wm-legend-religions-top, .wm-legend-religions-bottom, .wm-legend-religion-group {
+    display: flex;
+}
+
+.wm-legend-religions-top {
+    margin-bottom: 1rem;
+    margin-right: -$religion-item-margin;
+}
+
+.wm-legend-religions-bottom {
+    margin-right: -$religion-item-margin;
+}
+
+.wm-legend-religion-group {
+    margin-right: 1.25rem;
+
+    &:last-of-type {
+        margin-right: 0;
+    }
+}
+
+.wm-legend-religion-item {
+    display: flex;
+    align-items: center;
+    margin-right: $religion-item-margin;
+}
+
+.wm-legend-religion-marker {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.4rem;
+}
+
+// ctry
+
+.ctry {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    filter: drop-shadow(10px 10px 26px rgba(0,0,0,0.8));
+    cursor: default;
+
+    &:active {cursor: grabbing;}
+    &.highlighted {z-index: 70;}
+}
+
+.ctry-rotation {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: rotate(90deg);
+}
+
+.ctry-total-clms {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: $hex-circle-total;
+    filter: saturate(90%) brightness(85%);
+    transition: 0.3s filter linear;
+
+    &.active {
+        filter: saturate(100%) brightness(100%);
+    }
+}
+
+.ctry-accepted-clms {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    // background-color: $hex-circle-accepted;
+    border-radius: 50%;
+    border-color: $hex-circle-accepted-stroke;
+    border-width: 1px;
+    border-style: solid;
+    pointer-events: none;
+}
+
+.ctry-fletching {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $fletching-width;
+    transform: translate(-50%,-50%) scale(1);
+    pointer-events: none;
+    transition: 0.2s transform ease-in-out;
+    
+
+    &.expanded {
+        transform: translate(-50%,-50%) scale($fletching-scale-up);
+    }
+}
+
+.ctry-index-wrapper {
+    width: 100%;
+    height: $triangle-height-max;
+    // margin: $fletching-spacing 0;
+    display: flex;
+    pointer-events: none;
+}
+
+.low {height: 4px;}
+.moderate {height: 8px;}
+.high {height: 12px;}
+.very-high {height: 16px;}
+
+.ctry-index-spacer {
+    width: 100%;
+    height: $fletching-spacing;
+    pointer-events: none;
+    transition: 0.2s height ease-in-out 0.15s;
+
+    &.expanded {
+        height: $fletching-spacing-exp;
+    }
+}
+
+.ctry-gov-restrictions {
+    align-self: flex-end;
+    width: 100%;
+    clip-path: polygon(0% 0%, 0% 0.4px, $triangle-pos 100%, 100% 0%);
+    background-color: $hex-gov-restrictions;
+    transform: scaleY(-1);
+    pointer-events: auto;
+}
+
+.ctry-social-hostilities {
+    width: 100%;
+    clip-path: polygon(0% 0%, 0% 0.4px, $triangle-pos 100%, 100% 0%);
+    background-color: $hex-social-hostilities;
+    pointer-events: auto;
+}
+
+.ctry-clm-religions {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1);
+    width: $fletching-width;
+    height: $fletching-spacing;
+    overflow: hidden;
+    background-color: $rgba-b1-1;
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+    transition: 0.2s width ease-in-out , 0.2s height ease-in-out 0.15s, 0.2s transform ease-in-out;
+
+    &.expanded-med {
+        transform: translate(-50%,-50%) scale($fletching-scale-up);
+    }
+
+    &.expanded-full {
+        width: 170px;
+        height: 17px;
+        transform: translate(-50%,-50%) scale($fletching-scale-up);
+    }
+}
+
+.ctry-clm-religions-wrapper {
+    height: 100%;
+    margin-left: -$ctry-clm-religions-gutter;
+    margin-right: -$ctry-clm-religions-gutter;
+    display: flex;
+}
+
+.ctry-clm-religion-item {
+    height: 100%;
+    margin-left: $ctry-clm-religions-gutter;
+    margin-right: $ctry-clm-religions-gutter;
+}
+
+.christian {background-color:#ff6f6f;}
+.coptic {background-color:#df4f4f;}
+.pentecostal {background-color:#F279AC;}
+.muslim {background-color:#699D14;}
+.sunni {background-color:#27800F;}
+.shia {background-color:#5DBD3C;}
+.ahmadi {background-color:#00D488;}
+.alevi {background-color:#189460;}
+.bahai {background-color:#B79B54;}
+.buddhist {background-color:#3495CC;}
+.chieftaincy-and-fetish-priests {background-color:#B974FF;}
+.hindu {background-color:#e0720b;}
+.sikh {background-color:#D3C015;} 
+.traditional {background-color:#87DBED;}
+.apostasy {background-color:#FF5EE5;} 
+.varied-other {background-color:#737373;}
+
+.ctry-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(24px,-50%);
+    width: 130px;
+    pointer-events: none;
+}
+
+// mouse label
+
+#wm-mouse-label {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+    z-index: 110;
+
+    &.visible {
+        opacity: 1;
+    }
+}
+
+.wm-mouse-label-wrapper {
+    position: relative;
+    pointer-events: none;
+}
+
+.wm-mouse-label-container {
+    position: absolute;
+    top: 0;
+    left: -6px;
+    transform: translate(-100%, -50%);
+    display: flex;
+    // flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+}
+
+.wm-mouse-box {
+    padding: 0.5rem 0.7rem 0.6rem 0.7rem;
+    background-color: #000000;
+    pointer-events: none;
+}
+
+.wm-mouse-triangle {
+    width: 6px;
+    height: 8px;
+    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+    background-color: #000000;
+    pointer-events: none;
+}
+
+.wm-mouse-heading {
+    margin-bottom: 0.15rem;
+}
+
+.wm-outline {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 80;
+    border: 1px solid $rgba-b1-1;
+    pointer-events: none;
+}
